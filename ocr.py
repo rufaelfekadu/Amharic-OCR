@@ -35,7 +35,7 @@ cv2.imwrite(filename, gray)
 text = pytesseract.image_to_string(Image.open(filename),lang='amh+eng')
 os.remove(filename)
 
-file1 = open("ocr_temp.txt","w+")
+file1 = open("output/ocr_temp.txt","w+")
 file1.write(text)
 file1.close()
 
