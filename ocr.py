@@ -8,7 +8,7 @@ import imutils
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
+ap.add_argument("-i", "--image",default=r"images/image1.png",
 	help="path to input image to be OCR'd")
 ap.add_argument("-p", "--preprocess", type=str, default="thresh",
 	help="type of preprocessing to be done")
@@ -32,7 +32,7 @@ filename = "{}.png".format(os.getpid())
 cv2.imwrite(filename, gray)
 
 # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-text = pytesseract.image_to_string(Image.open(filename),lang='amh')
+text = pytesseract.image_to_string(Image.open(filename),lang='amh+eng')
 os.remove(filename)
 
 file1 = open("ocr_temp.txt","w+")
