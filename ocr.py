@@ -117,8 +117,3 @@ def ocr(image):
     os.remove(filename)
     
     return text
-
-    
-     
-    
-    
