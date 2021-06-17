@@ -4,7 +4,7 @@ import ocr as oc
 from flask import Flask, render_template, request, flash, url_for, send_from_directory
 from werkzeug.utils import redirect, secure_filename
 
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = r'/home/ruph/Documents/GitHub/OCR-nerd/flask_module/static/uploads/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -56,7 +56,8 @@ def upload_file():
 
             return render_template('index.html', tasks='uploads/'+tasks,text=text)
             # return redirect(url_for('download_file', name=filename))
-    tasks = "upload images"
+        
+    tasks = "uploade images"
     return render_template('index.html', tasks=tasks)
 
 
