@@ -5,41 +5,115 @@ import argparse
 import cv2
 import os
 import imutils
+import numpy as np
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image",default=r"images/image1.png",
-	help="path to input image to be OCR'd")
-ap.add_argument("-p", "--preprocess", type=str, default="thresh",
-	help="type of preprocessing to be done")
-args = vars(ap.parse_args())
 
-# load the example image and convert it to grayscale
-image = cv2.imread(args["image"])
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+def grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-# check to see if we should apply thresholding to preprocess the image
-if args["preprocess"] == "thresh":
-	gray = cv2.threshold(gray, 0, 255,
-		cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
-# make a check to see if median blurring should be done to remove noise
-elif args["preprocess"] == "blur":
-	gray = cv2.medianBlur(gray, 3)
+def noise_removal(image):
+    import numpy as np
+    kernel = np.ones((1, 1), np.uint8)
+    image = cv2.dilate(image, kernel, iterations=1)
+    kernel = np.ones((1, 1), np.uint8)
+    image = cv2.erode(image, kernel, iterations=1)
+    image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+    image = cv2.medianBlur(image, 3)
+    return (image)
 
-# write the grayscale image to disk as a temporary file so we can apply OCR to it
-filename = "{}.png".format(os.getpid())
-cv2.imwrite(filename, gray)
+def thin_font(image):
+    import numpy as np
+    image = cv2.bitwise_not(image)
+    kernel = np.ones((2,2),np.uint8)
+    image = cv2.erode(image, kernel, iterations=1)
+    image = cv2.bitwise_not(image)
+    return (image)
 
-# load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-text = pytesseract.image_to_string(Image.open(filename),lang='amh+eng')
-os.remove(filename)
+def thick_font(image):
+    import numpy as np
+    image = cv2.bitwise_not(image)
+    kernel = np.ones((2,2),np.uint8)
+    image = cv2.dilate(image, kernel, iterations=1)
+    image = cv2.bitwise_not(image)
+    return (image)
 
-file1 = open("output/ocr_temp.txt","w+")
-file1.write(text)
-file1.close()
+def getSkewAngle(cvImage) -> float:
+    # Prep image, copy, convert to gray scale, blur, and threshold
+    newImage = cvImage.copy()
+    gray = cv2.cvtColor(newImage, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (9, 9), 0)
+    thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
-# show the output images
-cv2.imshow("Image", image)
-cv2.imshow("Output", gray)
-cv2.waitKey(0)
+    # Apply dilate to merge text into meaningful lines/paragraphs.
+    # Use larger kernel on X axis to merge characters into single line, cancelling out any spaces.
+    # But use smaller kernel on Y axis to separate between different blocks of text
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (30, 5))
+    dilate = cv2.dilate(thresh, kernel, iterations=2)
+
+    # Find all contours
+    contours, hierarchy = cv2.findContours(dilate, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours = sorted(contours, key = cv2.contourArea, reverse = True)
+    for c in contours:
+        rect = cv2.boundingRect(c)
+        x,y,w,h = rect
+        cv2.rectangle(newImage,(x,y),(x+w,y+h),(0,255,0),2)
+
+    # Find largest contour and surround in min area box
+    largestContour = contours[0]
+    print (len(contours))
+    minAreaRect = cv2.minAreaRect(largestContour)
+    cv2.imwrite("temp/boxes.jpg", newImage)
+    # Determine the angle. Convert it to the value that was originally used to obtain skewed image
+    angle = minAreaRect[-1]
+    if angle < -45:
+        angle = 90 + angle
+    return -1.0 * angle
+# Rotate the image around its center
+def rotateImage(cvImage, angle: float):
+    newImage = cvImage.copy()
+    (h, w) = newImage.shape[:2]
+    center = (w // 2, h // 2)
+    M = cv2.getRotationMatrix2D(center, angle, 1.0)
+    newImage = cv2.warpAffine(newImage, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+    return newImage
+
+def deskew(cvImage):
+    angle = getSkewAngle(cvImage)
+    return rotateImage(cvImage, -1.0 * angle)
+
+
+def remove_borders(image):
+    contours, heiarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cntsSorted = sorted(contours, key=lambda x:cv2.contourArea(x))
+    cnt = cntsSorted[-1]
+    x, y, w, h = cv2.boundingRect(cnt)
+    crop = image[y:y+h, x:x+w]
+    return (crop)
+
+def preprocess(image):
+    
+    image = deskew(image)
+    image = grayscale(image)
+    thresh = cal_thresh(image)
+    thresh, image = cv2.threshold(image, thresh, thresh, cv2.THRESH_BINARY)
+    image =noise_removal(image)
+    return image
+
+def ocr(image):
+    
+    pre_img = preprocess(image)
+    
+    filename = "{}.png".format(os.getpid())
+    cv2.imwrite(filename, pre_img)
+
+    # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
+    text = pytesseract.image_to_string(Image.open(filename),lang='amh+eng')
+    os.remove(filename)
+    
+    return text
+
+    
+     
+    
+    
