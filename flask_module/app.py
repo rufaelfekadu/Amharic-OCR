@@ -1,10 +1,11 @@
 import os
 import cv2
+import ocr
 
 from flask import Flask, render_template, request, flash, url_for, send_from_directory
 from werkzeug.utils import redirect, secure_filename
 
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = r'/home/ruph/Documents/GitHub/OCR-nerd/flask_module/static/uploads/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -47,12 +48,17 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = file.filename
             print(app.config['UPLOAD_FOLDER'])
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            print(file_path)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             tasks = file.filename
             print("images saved")
-            return render_template('index.html', tasks='uploads/'+tasks)
+            img = cv2.imread(file_path)
+            text = ocr.ocr(img)
+            return render_template('index.html', tasks=text)
             # return redirect(url_for('download_file', name=filename))
-    tasks = "upload images"
+        
+    tasks = "uploade images"
     return render_template('index.html', tasks=tasks)
 
 
