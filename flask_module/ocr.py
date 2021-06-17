@@ -4,7 +4,6 @@ import pytesseract
 import argparse
 import cv2
 import os
-import imutils
 import numpy as np
 
 
@@ -116,8 +115,3 @@ def ocr(image):
     os.remove(filename)
     
     return text
-
-    
-     
-    
-    
