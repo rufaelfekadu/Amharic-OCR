@@ -11,7 +11,6 @@ import numpy as np
 def grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-
 def noise_removal(image):
     import numpy as np
     kernel = np.ones((1, 1), np.uint8)
