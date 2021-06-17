@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, flash, url_for, send_from_dir
 from werkzeug.utils import redirect, secure_filename
 
 curdir = os.getcwd()
-UPLOAD_FOLDER = os.path.join(curdir, 'static/uploads/')
+UPLOAD_FOLDER = os.path.join(curdir, 'flask_module/static/uploads/')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
