@@ -1,6 +1,6 @@
 import os
 import cv2
-
+import ocr as oc
 from flask import Flask, render_template, request, flash, url_for, send_from_directory
 from werkzeug.utils import redirect, secure_filename
 
@@ -47,10 +47,13 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = file.filename
             print(app.config['UPLOAD_FOLDER'])
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            dir = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(dir)
             tasks = file.filename
-            print("images saved")
-            return render_template('index.html', tasks='uploads/'+tasks)
+            img = cv2.imread(dir)
+            text = oc.ocr(img)
+
+            return render_template('index.html', tasks='uploads/' + tasks, text=text)
             # return redirect(url_for('download_file', name=filename))
     tasks = "upload images"
     return render_template('index.html', tasks=tasks)
