@@ -11,6 +11,11 @@ import numpy as np
 def grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+def cal_thresh(image):
+    im = np.array(image)
+    im2 = im.reshape(-1,1)
+    return (float(im2[np.argmax(im)])+float(im2[np.argmin(im)]))/2 -5
+    
 def noise_removal(image):
     import numpy as np
     kernel = np.ones((1, 1), np.uint8)
