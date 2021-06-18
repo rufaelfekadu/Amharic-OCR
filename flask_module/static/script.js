@@ -69,3 +69,14 @@ function updateThumbnail(dropZoneElement, file) {
     thumbnailElement.style.backgroundImage = null;
   }
 }
+
+const ddBtn=document.querySelector(".drop-down-button");
+const ddmBtn=document.querySelector(".drop-down-menu");
+
+
+
+
+ddBtn.addEventListener("click",(e)=>{
+ddmBtn.classList.toggle("hide")
+
+});
