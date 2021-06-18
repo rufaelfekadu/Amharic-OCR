@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-space-between sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark justify-content-space-between sticky-top">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-               <div class="navbar-brand mb-0 h1" style="font-size: 50px !important;">
-                 <a class="navbar-brand" href="#"><img width="100" height="80" class="d-inline-blockimg-responsive" alt="Brand" src="{{url_for('static',
-filename='images/logo2png.png')}}">
+               <div class="navbar-brand mb-0 h1" style="margin-right:500px !important; font-size: 30px !important;">
+                 <a class="navbar-brand" href="#"><img width="110" height="110" class="d-inline-blockimg-responsive" alt="Brand" src="{{url_for('static',
+filename='images/fidel.png')}}">
 
                  </a>
                </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav mr-auto  ">
+                    <ul class="navbar-nav ml-auto">
                     <li>
                       <a class="nav-link active" href="#">Home <span class="sr-only"></span></a>
                     </li>
@@ -45,9 +48,25 @@ filename='images/logo2png.png')}}">
               </nav>
 <div class="container-all">
 
-<div class="jumbotron text-center" style="background-image:url({{url_for('static',
+<div class="jumbotron jumbo text-center" style="padding-left:40px;background-image:url({{url_for('static',
 filename='images/bg2.jpg')}})">
-  <h1 class="display-4">Anbibe</h1>
+<div class="row">
+    <div class="col-sm ">
+          <h1 class="h2" style="color:white;margin-top:100px;margin-left:150px;">
+              Simple Conversion
+          </h1>
+    </div>
+<div class="col-sm">
+           <img  width="250px" height="350px" alt="logo" src="{{url_for('static',
+filename='images/file_synchronization_re_m5jd.svg')}}">
+    </div>
+    <div class="col-sm">
+           <img  width="250px" height="350px" alt="logo" src="{{url_for('static',
+filename='images/transfer_files.svg')}}">
+    </div>
+</div>
+
+
 
 
 </div>
@@ -56,9 +75,10 @@ filename='images/bg2.jpg')}})">
   <div class="row">
     <div class="col">
         <div class="content">
-            <p class="display-4">Free online Ocr</P>
+            <p class="display-4">Free </P>
 
-            <p class="h5" style="padding-left:10px;">Easily convert scanned Amharic books, images, newspapers, business and legal documents
+            <p class="h5" style="padding-left:10px;">
+                Easily convert  Amharic and English texts,books, images, newspapers, business and legal documents
         into editable and searchable text format for free.
         All major file formats (PDF, JPG, BMP, PNG) are supported.</P></div>
     </div>
@@ -88,13 +108,14 @@ filename='images/bg2.jpg')}})">
 
      <div class="drop-down col-md proceed-btn ">
     <button type="button" class="btn btn-secondary
-     btn-lg drop-down-button" style="width:80%; background-color:#a21230; font-size:20px;">Advanced</button>
+     btn-lg drop-down-button" style="width:80%; background-color:#a21230; font-size:20px;">
+        Advanced<i class="fa fa-caret-right" style=" padding-left:15px;"></i></button>
          <div class="drop-down-menu hide">
 
-         <input type="checkbox" id="scanned-image" name="scanned-image">
+         <input type="checkbox" id="scanned-image" style="width:20px;height:20px;" name="scanned-image">
           <label for="scanned-image">Scanned Image</label>
              <br>
-             <input type="checkbox" id="camera-image" name="camera-image">
+             <input type="checkbox" id="camera-image" style="width:20px;height:20px;" name="camera-image">
           <label for="camera-image">Camera Image</label>
          </div>
     </div>

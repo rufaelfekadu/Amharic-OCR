@@ -9,13 +9,26 @@ margin-top: 50px
 
 body{
 
-background: #D4DED4;
+background: #ffffff;
 min-height: 100vh
 
 }
-.bg-light{
-background:#D4DED4;
+.navbar-collapse{
+margin:left:50px
 }
+.navbar-dark{
+  color:ffffff;
+background:#5318b0;
+}
+.navbar-nav > li a{
+  font-size:20px
+  margin-left:30px;
+  margin-right:30px;
+}
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+}
+
 .navbar-brand{
 margin-left:50px
 
@@ -24,7 +37,11 @@ margin-left:50px
 
 font-size: 20px !important;
 }
+.jumbo{
 
+background:#5318b0;
+
+}
 .content{
 margin-top: 100px;
 margin-right: 150px;
@@ -43,7 +60,7 @@ margin-right: 150px;
   font-weight: 500;
   font-size: 18px;
   cursor: pointer;
-  border: 4px dashed #3ff4d1;
+  border: 4px dashed #5318b0;
   border-radius: 10px;
 }
 
@@ -104,6 +121,8 @@ margin-left:50px;
 }
 .drop-down-menu{
 border:1px ;
+font-size:20px;
+margin-top:20px
 width 120px
 }
 .drop-down-button{
