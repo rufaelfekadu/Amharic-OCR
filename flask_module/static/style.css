@@ -9,12 +9,12 @@ margin-top: 50px
 
 body{
 
-background: #FFFAFA;
+background: #D4DED4;
 min-height: 100vh
 
 }
 .bg-light{
-background:#41B3A3;
+background:#D4DED4;
 }
 .navbar-brand{
 margin-left:50px
@@ -89,5 +89,30 @@ color:white important;
 }
 .proceed-btn{
 margin-top:20px;
-margin-left:30px;
+
 }
+.proceed-btn2{
+margin-top:20px;
+margin-left:50px;
+
+}
+.container-all{
+height:1000px;
+}
+.container1{
+margin-left:50px;
+}
+.drop-down-menu{
+border:1px ;
+width 120px
+}
+.drop-down-button{
+cursor:pointer;
+}
+.drop-down-menu a{
+display:block;
+padding:4px 10px;
+}
+
+.hide{
+display: none}

@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, flash, url_for, send_from_dir
 from werkzeug.utils import redirect, secure_filename
 
 curdir = os.getcwd()
-UPLOAD_FOLDER = os.path.join(curdir, 'flask_module/static/uploads/')
+UPLOAD_FOLDER = os.path.join(curdir, 'static/uploads/')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -35,6 +35,7 @@ def about():
 
 @app.route('/', methods=['POST'])
 def upload_file():
+    scanned_image = False
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -52,9 +53,14 @@ def upload_file():
             print(app.config['UPLOAD_FOLDER'])
             dir = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(dir)
+            scanned_image = request.form.get('scanned-image')
+            camera_image = request.form.get('camera-image')
+            if scanned_image:
+                scanned_image = True
             tasks = file.filename
             img = cv2.imread(dir)
             text = oc.ocr(img)
+            print(text)
             # return render_template('index.html', tasks='uploads/' + tasks, text=text)
             return redirect(url_for('download_file', name=filename))
 

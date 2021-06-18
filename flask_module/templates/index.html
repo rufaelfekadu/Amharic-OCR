@@ -43,7 +43,7 @@ filename='images/logo2png.png')}}">
 
                 </div>
               </nav>
-<hr class="mt-0 mb-3"/>
+<div class="container-all">
 
 <div class="jumbotron text-center" style="background-image:url({{url_for('static',
 filename='images/bg2.jpg')}})">
@@ -83,10 +83,33 @@ filename='images/bg2.jpg')}})">
 
 
   </div>
-<div class="proceed-btn">
+<div class="container1">
+    <div class="row">
 
+     <div class="drop-down col-md proceed-btn ">
+    <button type="button" class="btn btn-secondary
+     btn-lg drop-down-button" style="width:80%; background-color:#a21230; font-size:20px;">Advanced</button>
+         <div class="drop-down-menu hide">
+
+         <input type="checkbox" id="scanned-image" name="scanned-image">
+          <label for="scanned-image">Scanned Image</label>
+             <br>
+             <input type="checkbox" id="camera-image" name="camera-image">
+          <label for="camera-image">Camera Image</label>
+         </div>
+    </div>
+
+     <div class="proceed-btn2 col-sm" >
     <button type="submit" class="btn btn-secondary  btn-lg" style="width:100%; background-color:#a21230; font-size:20px; " >CONVERT</button>
     </div>
+
+
+
+     </div>
+</div>
+
+
+
      <script src="{{url_for('static',filename='script.js')}}"></script>
 
 
@@ -97,6 +120,11 @@ filename='images/bg2.jpg')}})">
     </div>
   </div>
 </div>
+
+
+
+</div>
+
 
 
 
