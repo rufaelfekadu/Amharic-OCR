@@ -13,32 +13,37 @@ background: #FFFAFA;
 min-height: 100vh
 
 }
-.navbar-light{
+.bg-light{
 background:#41B3A3;
 }
 .navbar-brand{
 margin-left:50px
 
 }
+.nav-link{
+
+font-size: 20px !important;
+}
+
 .content{
 margin-top: 100px;
+margin-right: 150px;
 }
 .drop-zone {
  margin-top: 100px;
  margin-left: 30px;
-  max-width: 400px;
-  height: 300px;
-  padding: 25px;
+  max-width: 550px;
+  height: 230px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: "Quicksand", sans-serif;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
-  color: #41B3A3;
-  border: 4px dashed #41B3A3;
+  border: 4px dashed #3ff4d1;
   border-radius: 10px;
 }
 
@@ -73,11 +78,16 @@ margin-top: 100px;
   text-align: center;
 }
 
+.container{
+background-color=#a21230
+
+
+}
+.btn-secondary{
+color:white important;
+
+}
 .proceed-btn{
-
 margin-top:20px;
-margin-left:20px;
-
-
-
+margin-left:30px;
 }
