@@ -1,4 +1,5 @@
 # import the necessary packages
+from re import UNICODE
 from PIL import Image
 import pytesseract
 import argparse
@@ -6,6 +7,8 @@ import cv2
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from docx import Document
+from docx.shared import Inches
 
 
 def display(im_path):
@@ -31,11 +34,6 @@ def display(im_path):
 
 def grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-def cal_thresh(image):
-    im = np.array(image)
-    im2 = im.reshape(-1,1)
-    return (float(im2[np.argmax(im)])+float(im2[np.argmin(im)]))/2 -5
     
 def noise_removal(image):
     import numpy as np
@@ -129,9 +127,12 @@ def preprocess(image):
     # image =noise_removal(th)
     return image
 
-def ocr(image):
+def ocr(image,scanned = False):
     
-    pre_img = preprocess(image)
+    if scanned:
+        pre_img = image
+    else:
+        pre_img = preprocess(image)
     
     # filename = "{}.png".format(os.getpid())
     # cv2.imwrite(filename, pre_img)
@@ -139,7 +140,22 @@ def ocr(image):
     # cv2.imshow('image',pre_img)
     # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
     text = pytesseract.image_to_string(pre_img,lang='amh+eng')
-    print(pytesseract.image_to_boxes(pre_img,lang = 'amh'))
     # os.remove(filename)
-    
-    return text
+    # _ , bound_box = pytesseract.image_to_boxes(pre_img,lang='amh+eng')
+
+    # new  = ' '.join(chr(text) for x in range(0x1200, 0x139A) if chr(text).isprintable())
+
+    # document = Document()
+    # y = text.encode()
+    # print(y.decode('utf-8','replace'))
+    # document.add_paragraph(text)
+    # doc_dir = os.path.join(os.getpid(),'.docx')
+    # document.save(str(os.getpid())+'.docx')
+
+    filename = "{}.txt".format(os.getpid())
+    dir = os.path.join('output',filename)
+    file1 = open(dir,"w")
+    file1.write(text)
+    file1.close()
+
+    return text,dir
