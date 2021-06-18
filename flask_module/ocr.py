@@ -5,7 +5,29 @@ import argparse
 import cv2
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 
+
+def display(im_path):
+    dpi = 80
+    im_data = plt.imread(im_path)
+
+    height, width  = im_data.shape[:2]
+    
+    # What size does the figure need to be in inches to fit the image?
+    figsize = width / float(dpi), height / float(dpi)
+
+    # Create a figure of the right size with one axes that takes up the full figure
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes([0, 0, 1, 1])
+
+    # Hide spines, ticks, etc.
+    ax.axis('off')
+
+    # Display the image.
+    ax.imshow(im_data, cmap='gray')
+
+    plt.show()
 
 def grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -98,20 +120,26 @@ def preprocess(image):
     
     image = deskew(image)
     image = grayscale(image)
-    thresh = cal_thresh(image)
-    thresh, image = cv2.threshold(image, thresh, thresh, cv2.THRESH_BINARY)
-    image =noise_removal(image)
+    # thresh = cal_thresh(image)
+    # thresh, image = cv2.threshold(image, 80, 180, cv2.THRESH_BINARY)
+    # blur = cv2.GaussianBlur(image,(5,5),0)
+    blur = cv2.medianBlur(image, 5)
+    ret3,image = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    # th = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 21, 2)
+    # image =noise_removal(th)
     return image
 
 def ocr(image):
     
     pre_img = preprocess(image)
     
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, pre_img)
-
+    # filename = "{}.png".format(os.getpid())
+    # cv2.imwrite(filename, pre_img)
+    # display(filename)
+    # cv2.imshow('image',pre_img)
     # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-    text = pytesseract.image_to_string(Image.open(filename),lang='amh+eng')
-    os.remove(filename)
+    text = pytesseract.image_to_string(pre_img,lang='amh+eng')
+    print(pytesseract.image_to_boxes(pre_img,lang = 'amh'))
+    # os.remove(filename)
     
     return text
