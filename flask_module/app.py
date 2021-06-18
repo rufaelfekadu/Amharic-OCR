@@ -1,5 +1,7 @@
 import os
 import cv2
+import pytesseract
+
 import ocr as oc
 from flask import Flask, render_template, request, flash, url_for, send_from_directory
 from werkzeug.utils import redirect, secure_filename
@@ -10,6 +12,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 def allowed_file(filename):
@@ -19,11 +22,10 @@ def allowed_file(filename):
 
 #
 #
-# @app.route('/', methods=['POST', 'Get'])
-# def home():
-#     if request.method == 'GET':
-#         tasks = "hello"
-#         return render_template("index.html", tasks=tasks)
+@app.route('/', methods=['Get'])
+def home():
+    if request.method == 'GET':
+        return render_template("index.html")
 
 
 @app.route('/about')
@@ -31,7 +33,7 @@ def about():
     return "welcome about"
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -53,12 +55,10 @@ def upload_file():
             tasks = file.filename
             img = cv2.imread(dir)
             text = oc.ocr(img)
+            # return render_template('index.html', tasks='uploads/' + tasks, text=text)
+            return redirect(url_for('download_file', name=filename))
 
-            return render_template('index.html', tasks='uploads/' + tasks, text=text)
-            # return redirect(url_for('download_file', name=filename))
-
-    tasks = "uploade images"
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html')
 
 
 @app.route('/uploads/<name>')
