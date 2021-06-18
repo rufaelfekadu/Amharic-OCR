@@ -148,8 +148,14 @@ def ocr(image,scanned = False):
     # document = Document()
     # y = text.encode()
     # print(y.decode('utf-8','replace'))
-    # document.add_paragraph(str(text))
+    # document.add_paragraph(text)
     # doc_dir = os.path.join(os.getpid(),'.docx')
     # document.save(str(os.getpid())+'.docx')
 
-    return text
+    filename = "{}.txt".format(os.getpid())
+    dir = os.path.join('output',filename)
+    file1 = open(dir,"w")
+    file1.write(text)
+    file1.close()
+
+    return text,dir
