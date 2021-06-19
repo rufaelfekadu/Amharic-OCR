@@ -1,5 +1,4 @@
 # import the necessary packages
-from re import UNICODE
 from PIL import Image
 import pytesseract
 import argparse
@@ -7,8 +6,7 @@ import cv2
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from docx import Document
-from docx.shared import Inches
+
 
 
 def display(im_path):
@@ -127,7 +125,7 @@ def preprocess(image):
     # image =noise_removal(th)
     return image
 
-def ocr(image,scanned = False):
+def ocr(image,scanned = False,language='amh'):
     
     if scanned:
         pre_img = image
@@ -139,7 +137,7 @@ def ocr(image,scanned = False):
     # display(filename)
     # cv2.imshow('image',pre_img)
     # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-    text = pytesseract.image_to_string(pre_img,lang='amh+eng')
+    text = pytesseract.image_to_string(pre_img,lang=language)
     # os.remove(filename)
     # _ , bound_box = pytesseract.image_to_boxes(pre_img,lang='amh+eng')
 
