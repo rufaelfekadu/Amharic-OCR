@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-space-between sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark justify-content-space-between sticky-top">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-               <div class="navbar-brand mb-0 h1" style="font-size: 50px !important;">
-                 <a class="navbar-brand" href="#"><img width="100" height="80" class="d-inline-blockimg-responsive" alt="Brand" src="{{url_for('static',
-filename='images/logo2png.png')}}">
+               <div class="navbar-brand mb-0 h1" style="margin-right:500px !important; font-size: 30px !important;">
+                 <a class="navbar-brand" href="#"><img width="110" height="110" class="d-inline-blockimg-responsive" alt="Brand" src="{{url_for('static',
+filename='images/fidel.png')}}">
 
                  </a>
                </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav mr-auto  ">
+                    <ul class="navbar-nav ml-auto">
                     <li>
                       <a class="nav-link active" href="#">Home <span class="sr-only"></span></a>
                     </li>
@@ -45,9 +48,25 @@ filename='images/logo2png.png')}}">
               </nav>
 <div class="container-all">
 
-<div class="jumbotron text-center" style="background-image:url({{url_for('static',
+<div class="jumbotron jumbo text-center" style="padding-left:40px;background-image:url({{url_for('static',
 filename='images/bg2.jpg')}})">
-  <h1 class="display-4">Anbibe</h1>
+<div class="row">
+    <div class="col-sm ">
+          <h1 class="h2" style="color:white;margin-top:100px;margin-left:150px;">
+              Advanced OCR at your finger tips
+          </h1>
+    </div>
+<div class="col-sm">
+           <img  width="250px" height="350px" alt="logo" src="{{url_for('static',
+filename='images/file_synchronization_re_m5jd.svg')}}">
+    </div>
+    <div class="col-sm">
+           <img  width="250px" height="350px" alt="logo" src="{{url_for('static',
+filename='images/transfer_files.svg')}}">
+    </div>
+</div>
+
+
 
 
 </div>
@@ -56,11 +75,12 @@ filename='images/bg2.jpg')}})">
   <div class="row">
     <div class="col">
         <div class="content">
-            <p class="display-4">Free online Ocr</P>
+            <p class="display-4">Optical Character Recognition </P>
 
-            <p class="h5" style="padding-left:10px;">Easily convert scanned Amharic books, images, newspapers, business and legal documents
-        into editable and searchable text format for free.
-        All major file formats (PDF, JPG, BMP, PNG) are supported.</P></div>
+            <p class="h5" style="padding-left:10px;">
+                Effortlessly extract Amharic and English books, images, newspapers, business and legal documents
+        into editable text format for free.
+        </P></div>
     </div>
     <div class="col md-auto">
      <div class="drag-area">
@@ -71,7 +91,7 @@ filename='images/bg2.jpg')}})">
      <div class="col">
         <span class="drop-zone__prompt">Drop file here or click to upload</span>
 
-    <input type="file" name="file" class="drop-zone__input">
+    <input type="file"  name="file" class="drop-zone__input"  required >
     </div>
     <div >
          <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16">
@@ -88,19 +108,28 @@ filename='images/bg2.jpg')}})">
 
      <div class="drop-down col-md proceed-btn ">
     <button type="button" class="btn btn-secondary
-     btn-lg drop-down-button" style="width:80%; background-color:#a21230; font-size:20px;">Advanced</button>
+     btn-lg drop-down-button" style="width:80%; background-color:#a21230; font-size:20px;">
+        Options<i class="fa fa-caret-right" style=" padding-left:15px;"></i></button>
          <div class="drop-down-menu hide">
-
-         <input type="checkbox" id="scanned-image" name="scanned-image">
+           <h5>Image Source</h5>
+         <input type="checkbox" id="scanned-image" style="width:20px;height:20px;" name="scanned-image">
           <label for="scanned-image">Scanned Image</label>
              <br>
-             <input type="checkbox" id="camera-image" name="camera-image">
+             <input type="checkbox" id="camera-image" style="width:20px;height:20px;" name="camera-image">
           <label for="camera-image">Camera Image</label>
+              <br>
+             <h5>Language</h5>
+             <input type="checkbox" id="select-amh" style="width:20px;height:20px;" name="select-amh">
+          <label for="select-amh">Amh</label>
+              <br>
+              <input type="checkbox" id="select-eng" style="width:20px;height:20px;" name="select-eng">
+          <label for="select-eng">Eng</label>
+
          </div>
     </div>
-
      <div class="proceed-btn2 col-sm" >
-    <button type="submit" class="btn btn-secondary  btn-lg" style="width:100%; background-color:#a21230; font-size:20px; " >CONVERT</button>
+    <button type="submit" class="btn btn-secondary  btn-lg" style="width:100%; background-color:#a21230; font-size:20px; " >
+        Extract</button>
     </div>
 
 
@@ -125,7 +154,102 @@ filename='images/bg2.jpg')}})">
 
 </div>
 
+<div class="footer1" style="background-color: rgb(32, 46, 46);">             <!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4 footerclass">
 
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
+
+              <!-- Content -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color: white;">About us</h5>
+              <p style="color: white;"> Fidel allows user to upload image and extract texts </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+              <!-- Links -->
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="color: white;">Quick links</h5>
+
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#!" style="color: white;" >Help</a>
+                </li>
+                <li>
+                  <a href="#!" style="color: white;">About</a>
+                </li>
+                <li>
+                  <a href="#!" style="color: white;">Terms and Conditions</a>
+                </li>
+
+
+              </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+          <li class="list-inline-item">
+            <h5 class="mb-1" style="color: white;"> Register for free</h5>
+          </li>
+          <li class="list-inline-item">
+            <a href="" class="btn btn-danger btn-rounded">Sign up!</a>
+          </li>
+        </ul>
+        <!-- Call to action -->
+
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+          <li class="list-inline-item">
+                <a href="#" class="fa fa-facebook"></a>
+          </li>
+
+          <li class="list-inline-item">
+
+                <a href="#" class="fa fa-twitter"></a>
+          </li>
+          <li class="list-inline-item">
+
+                <a href="#" class="fa fa-instagram"></a>
+          </li>
+        </ul>
+        <!-- Social buttons -->
+
+
+
+      </footer>
+      <!-- Footer --></div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
