@@ -73,6 +73,27 @@ filename='images/transfer_files.svg')}}">
 
 <div class="container" >
   <div class="row">
+    {% if text %}
+    <div class="col">
+      
+      <div class="container-text" style="overflow: scroll;">
+       
+        <div class="display-text">
+          
+          <p>{{text}}</p>
+          
+        </div>
+      </div>
+      <div class="button-down" style="padding-left: 170px; padding-top: 10px;">
+
+          <!-- <input type = 'hidden' name="download" value={{dir}}> -->
+            <!-- <button type='submit' class="btn btn-large btn-success button-down"><i class="fa fa-download" aria-hidden="true"></i></button> -->
+            <a class="btn btn-success button-down" type="button" target="_blank" href="{{ url_for('download_file', name = dir) }}"><i class="fa fa-download" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    
+   
+    {% else %}
     <div class="col">
         <div class="content">
             <p class="display-4">Optical Character Recognition </P>
@@ -82,6 +103,7 @@ filename='images/transfer_files.svg')}}">
         into editable text format for free.
         </P></div>
     </div>
+    {% endif %}
     <div class="col md-auto">
      <div class="drag-area">
 
@@ -119,12 +141,14 @@ filename='images/transfer_files.svg')}}">
           <label for="camera-image">Camera Image</label>
               <br>
              <h5>Language</h5>
-             <input type="checkbox" id="select-amh" style="width:20px;height:20px;" name="select-amh">
-          <label for="select-amh">Amh</label>
-              <br>
-              <input type="checkbox" id="select-eng" style="width:20px;height:20px;" name="select-eng">
-          <label for="select-eng">Eng</label>
-
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="select-amh" style="width:20px;height:20px;" name="select-amh">
+                <label  class="form-check-label" for="select-amh">Amharic</label>
+             </div>
+             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="select-eng" style="width:20px;height:20px;" name="select-eng">
+                <label class="form-check-label" for="select-eng" >English</label>
+             </div>
          </div>
     </div>
      <div class="proceed-btn2 col-sm" >

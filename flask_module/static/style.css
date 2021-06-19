@@ -47,7 +47,7 @@ margin-top: 100px;
 margin-right: 150px;
 }
 .drop-zone {
- margin-top: 100px;
+ margin-top: 200px;
  margin-left: 30px;
   max-width: 550px;
   height: 230px;
@@ -114,7 +114,7 @@ margin-left:50px;
 
 }
 .container-all{
-height:1000px;
+height:1050px;
 }
 .container1{
 margin-left:50px;
@@ -135,3 +135,47 @@ padding:4px 10px;
 
 .hide{
 display: none}
+.container-text{
+  margin-top: 100px;
+ margin-left: 30px;
+  max-width: 550px;
+  height: 400px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  border: 4px solid #5318b0;
+  border-radius: 10px;
+}
+.display-text{
+  padding: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.button-down{
+  width:200px;
+  box-align: center;
+}

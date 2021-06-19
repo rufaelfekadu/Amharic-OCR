@@ -13,7 +13,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 def allowed_file(filename):
@@ -38,6 +38,9 @@ def about():
 def upload_file():
     scanned_image = False
     lang = "amh"
+    down = request.form.get('download')
+    if down:
+            return redirect(url_for('download_file', name=down))
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -70,9 +73,10 @@ def upload_file():
             tasks = file.filename
             img = cv2.imread(dir)
             text, dir = oc.ocr(img, scanned_image, lang)
-            print(text)
-            # return render_template('index.html', tasks='uploads/' + tasks, text=text)
-            return redirect(url_for('download_file', name=dir))
+            # print(text)
+            return render_template('index.html', tasks='uploads/' + tasks, text=text, dir=dir)
+        
+        
 
     return render_template('index.html')
 
