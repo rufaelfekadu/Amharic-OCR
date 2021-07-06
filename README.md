@@ -10,8 +10,9 @@ This project uses the tesseract application provded by google under apache 2.0 l
 4. Flask
 
 # Usage
-```sh
 execute app.py located in the flask_module directrory.
+```sh
+$ python3 app.py
 ```
 #results
 
