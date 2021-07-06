@@ -1,6 +1,6 @@
 # Simple OCR website
 
-# Discription
+# Description
 This project uses the tesseract application provded by google under apache 2.0 license to build a web app that extract text from image files.
 
 # Requirements
@@ -10,8 +10,9 @@ This project uses the tesseract application provded by google under apache 2.0 l
 4. Flask
 
 # Usage
+```sh
 execute app.py located in the flask_module directrory.
-
+```
 #results
 
 checkout the test images in the 'images' directory. here is one examle
